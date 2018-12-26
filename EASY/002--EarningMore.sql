@@ -1,0 +1,37 @@
+/*
+The Employee table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.
+
++----+-------+--------+-----------+
+| Id | Name  | Salary | ManagerId |
++----+-------+--------+-----------+
+| 1  | Joe   | 70000  | 3         |
+| 2  | Henry | 80000  | 4         |
+| 3  | Sam   | 60000  | NULL      |
+| 4  | Max   | 90000  | NULL      |
++----+-------+--------+-----------+
+Given the Employee table, write a SQL query that finds out employees who earn more than their managers. For the above table, Joe is the only employee who earns more than his manager.
+
++----------+
+| Employee |
++----------+
+| Joe      |
++----------+
+*/
+
+--问题，求谁比自己的经理薪水多？
+/*
+思路：比较a和b谁高
+a = 员工对应薪水
+b = 员工对应的经理的薪水
+a和b需要在同一个row，当id和M-id相等时，比较
+*/
+
+SELECT 
+    b.name AS Employee
+FROM 
+    Employee AS a, 
+    Employee AS b
+WHERE 
+    a.Id = b.ManagerId
+    AND
+    b.salary > a.salary
